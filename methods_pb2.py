@@ -19,24 +19,59 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\rmethods.proto\"\x1e\n\rcreateMessage\x12\r\n\x05\x65rror\x18\x01 \x01(\x05\"-\n\rdeleteMessage\x12\r\n\x05\x65rror\x18\x01 \x01(\x05\x12\r\n\x05index\x18\x02 \x01(\x05\",\n\x0blistMessage\x12\r\n\x05\x65rror\x18\x01 \x01(\x05\x12\x0e\n\x06result\x18\x02 \x01(\t\":\n\x0c\x63ountMessage\x12\r\n\x05\x65rror\x18\x01 \x01(\x05\x12\x0b\n\x03url\x18\x02 \x01(\t\x12\x0e\n\x06result\x18\x03 \x01(\x05\">\n\x10\x65numerateMessage\x12\r\n\x05\x65rror\x18\x01 \x01(\x05\x12\x0b\n\x03url\x18\x02 \x01(\t\x12\x0e\n\x06result\x18\x03 \x01(\t2@\n\x0cworkerCreate\x12\x30\n\x0cworkerCreate\x12\x0e.createMessage\x1a\x0e.createMessage\"\x00\x32@\n\x0cworkerDelete\x12\x30\n\x0cworkerDelete\x12\x0e.deleteMessage\x1a\x0e.deleteMessage\"\x00\x32:\n\x0blistWorkers\x12+\n\x0blistWorkers\x12\x0c.listMessage\x1a\x0c.listMessage\"\x00\x32:\n\ncountWords\x12,\n\ncountWords\x12\r.countMessage\x1a\r.countMessage\"\x00\x32J\n\x0e\x65numerateWords\x12\x38\n\x0e\x65numerateWords\x12\x11.enumerateMessage\x1a\x11.enumerateMessage\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\rmethods.proto\"^\n\x07message\x12\r\n\x05\x65rror\x18\x01 \x01(\x05\x12\x0c\n\x04node\x18\x02 \x01(\x05\x12\r\n\x05\x63ount\x18\x03 \x01(\x05\x12\x0b\n\x03url\x18\x04 \x01(\t\x12\x0c\n\x04list\x18\x05 \x01(\t\x12\x0c\n\x04\x65num\x18\x06 \x01(\t24\n\x0cworkerCreate\x12$\n\x0cworkerCreate\x12\x08.message\x1a\x08.message\"\x00\x32\x34\n\x0cworkerDelete\x12$\n\x0cworkerDelete\x12\x08.message\x1a\x08.message\"\x00\x32\x32\n\x0blistWorkers\x12#\n\x0blistWorkers\x12\x08.message\x1a\x08.message\"\x00\x32\x30\n\ncountWords\x12\"\n\ncountWords\x12\x08.message\x1a\x08.message\"\x00\x32\x38\n\x0e\x65numerateWords\x12&\n\x0e\x65numerateWords\x12\x08.message\x1a\x08.message\"\x00\x62\x06proto3'
 )
 
 
 
 
-_CREATEMESSAGE = _descriptor.Descriptor(
-  name='createMessage',
-  full_name='createMessage',
+_MESSAGE = _descriptor.Descriptor(
+  name='message',
+  full_name='message',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='error', full_name='createMessage.error', index=0,
+      name='error', full_name='message.error', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='node', full_name='message.node', index=1,
+      number=2, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='count', full_name='message.count', index=2,
+      number=3, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='url', full_name='message.url', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='list', full_name='message.list', index=4,
+      number=5, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='enum', full_name='message.enum', index=5,
+      number=6, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -53,220 +88,18 @@ _CREATEMESSAGE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=17,
-  serialized_end=47,
+  serialized_end=111,
 )
 
-
-_DELETEMESSAGE = _descriptor.Descriptor(
-  name='deleteMessage',
-  full_name='deleteMessage',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='error', full_name='deleteMessage.error', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='index', full_name='deleteMessage.index', index=1,
-      number=2, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=49,
-  serialized_end=94,
-)
-
-
-_LISTMESSAGE = _descriptor.Descriptor(
-  name='listMessage',
-  full_name='listMessage',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='error', full_name='listMessage.error', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='result', full_name='listMessage.result', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=96,
-  serialized_end=140,
-)
-
-
-_COUNTMESSAGE = _descriptor.Descriptor(
-  name='countMessage',
-  full_name='countMessage',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='error', full_name='countMessage.error', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='url', full_name='countMessage.url', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='result', full_name='countMessage.result', index=2,
-      number=3, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=142,
-  serialized_end=200,
-)
-
-
-_ENUMERATEMESSAGE = _descriptor.Descriptor(
-  name='enumerateMessage',
-  full_name='enumerateMessage',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='error', full_name='enumerateMessage.error', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='url', full_name='enumerateMessage.url', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='result', full_name='enumerateMessage.result', index=2,
-      number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=202,
-  serialized_end=264,
-)
-
-DESCRIPTOR.message_types_by_name['createMessage'] = _CREATEMESSAGE
-DESCRIPTOR.message_types_by_name['deleteMessage'] = _DELETEMESSAGE
-DESCRIPTOR.message_types_by_name['listMessage'] = _LISTMESSAGE
-DESCRIPTOR.message_types_by_name['countMessage'] = _COUNTMESSAGE
-DESCRIPTOR.message_types_by_name['enumerateMessage'] = _ENUMERATEMESSAGE
+DESCRIPTOR.message_types_by_name['message'] = _MESSAGE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
-createMessage = _reflection.GeneratedProtocolMessageType('createMessage', (_message.Message,), {
-  'DESCRIPTOR' : _CREATEMESSAGE,
+message = _reflection.GeneratedProtocolMessageType('message', (_message.Message,), {
+  'DESCRIPTOR' : _MESSAGE,
   '__module__' : 'methods_pb2'
-  # @@protoc_insertion_point(class_scope:createMessage)
+  # @@protoc_insertion_point(class_scope:message)
   })
-_sym_db.RegisterMessage(createMessage)
-
-deleteMessage = _reflection.GeneratedProtocolMessageType('deleteMessage', (_message.Message,), {
-  'DESCRIPTOR' : _DELETEMESSAGE,
-  '__module__' : 'methods_pb2'
-  # @@protoc_insertion_point(class_scope:deleteMessage)
-  })
-_sym_db.RegisterMessage(deleteMessage)
-
-listMessage = _reflection.GeneratedProtocolMessageType('listMessage', (_message.Message,), {
-  'DESCRIPTOR' : _LISTMESSAGE,
-  '__module__' : 'methods_pb2'
-  # @@protoc_insertion_point(class_scope:listMessage)
-  })
-_sym_db.RegisterMessage(listMessage)
-
-countMessage = _reflection.GeneratedProtocolMessageType('countMessage', (_message.Message,), {
-  'DESCRIPTOR' : _COUNTMESSAGE,
-  '__module__' : 'methods_pb2'
-  # @@protoc_insertion_point(class_scope:countMessage)
-  })
-_sym_db.RegisterMessage(countMessage)
-
-enumerateMessage = _reflection.GeneratedProtocolMessageType('enumerateMessage', (_message.Message,), {
-  'DESCRIPTOR' : _ENUMERATEMESSAGE,
-  '__module__' : 'methods_pb2'
-  # @@protoc_insertion_point(class_scope:enumerateMessage)
-  })
-_sym_db.RegisterMessage(enumerateMessage)
+_sym_db.RegisterMessage(message)
 
 
 
@@ -277,16 +110,16 @@ _WORKERCREATE = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=266,
-  serialized_end=330,
+  serialized_start=113,
+  serialized_end=165,
   methods=[
   _descriptor.MethodDescriptor(
     name='workerCreate',
     full_name='workerCreate.workerCreate',
     index=0,
     containing_service=None,
-    input_type=_CREATEMESSAGE,
-    output_type=_CREATEMESSAGE,
+    input_type=_MESSAGE,
+    output_type=_MESSAGE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
@@ -303,16 +136,16 @@ _WORKERDELETE = _descriptor.ServiceDescriptor(
   index=1,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=332,
-  serialized_end=396,
+  serialized_start=167,
+  serialized_end=219,
   methods=[
   _descriptor.MethodDescriptor(
     name='workerDelete',
     full_name='workerDelete.workerDelete',
     index=0,
     containing_service=None,
-    input_type=_DELETEMESSAGE,
-    output_type=_DELETEMESSAGE,
+    input_type=_MESSAGE,
+    output_type=_MESSAGE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
@@ -329,16 +162,16 @@ _LISTWORKERS = _descriptor.ServiceDescriptor(
   index=2,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=398,
-  serialized_end=456,
+  serialized_start=221,
+  serialized_end=271,
   methods=[
   _descriptor.MethodDescriptor(
     name='listWorkers',
     full_name='listWorkers.listWorkers',
     index=0,
     containing_service=None,
-    input_type=_LISTMESSAGE,
-    output_type=_LISTMESSAGE,
+    input_type=_MESSAGE,
+    output_type=_MESSAGE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
@@ -355,16 +188,16 @@ _COUNTWORDS = _descriptor.ServiceDescriptor(
   index=3,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=458,
-  serialized_end=516,
+  serialized_start=273,
+  serialized_end=321,
   methods=[
   _descriptor.MethodDescriptor(
     name='countWords',
     full_name='countWords.countWords',
     index=0,
     containing_service=None,
-    input_type=_COUNTMESSAGE,
-    output_type=_COUNTMESSAGE,
+    input_type=_MESSAGE,
+    output_type=_MESSAGE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
@@ -381,16 +214,16 @@ _ENUMERATEWORDS = _descriptor.ServiceDescriptor(
   index=4,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=518,
-  serialized_end=592,
+  serialized_start=323,
+  serialized_end=379,
   methods=[
   _descriptor.MethodDescriptor(
     name='enumerateWords',
     full_name='enumerateWords.enumerateWords',
     index=0,
     containing_service=None,
-    input_type=_ENUMERATEMESSAGE,
-    output_type=_ENUMERATEMESSAGE,
+    input_type=_MESSAGE,
+    output_type=_MESSAGE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),

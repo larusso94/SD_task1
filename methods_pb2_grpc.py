@@ -16,8 +16,8 @@ class workerCreateStub(object):
         """
         self.workerCreate = channel.unary_unary(
                 '/workerCreate/workerCreate',
-                request_serializer=methods__pb2.createMessage.SerializeToString,
-                response_deserializer=methods__pb2.createMessage.FromString,
+                request_serializer=methods__pb2.message.SerializeToString,
+                response_deserializer=methods__pb2.message.FromString,
                 )
 
 
@@ -35,8 +35,8 @@ def add_workerCreateServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'workerCreate': grpc.unary_unary_rpc_method_handler(
                     servicer.workerCreate,
-                    request_deserializer=methods__pb2.createMessage.FromString,
-                    response_serializer=methods__pb2.createMessage.SerializeToString,
+                    request_deserializer=methods__pb2.message.FromString,
+                    response_serializer=methods__pb2.message.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -60,8 +60,8 @@ class workerCreate(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/workerCreate/workerCreate',
-            methods__pb2.createMessage.SerializeToString,
-            methods__pb2.createMessage.FromString,
+            methods__pb2.message.SerializeToString,
+            methods__pb2.message.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -77,8 +77,8 @@ class workerDeleteStub(object):
         """
         self.workerDelete = channel.unary_unary(
                 '/workerDelete/workerDelete',
-                request_serializer=methods__pb2.deleteMessage.SerializeToString,
-                response_deserializer=methods__pb2.deleteMessage.FromString,
+                request_serializer=methods__pb2.message.SerializeToString,
+                response_deserializer=methods__pb2.message.FromString,
                 )
 
 
@@ -96,8 +96,8 @@ def add_workerDeleteServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'workerDelete': grpc.unary_unary_rpc_method_handler(
                     servicer.workerDelete,
-                    request_deserializer=methods__pb2.deleteMessage.FromString,
-                    response_serializer=methods__pb2.deleteMessage.SerializeToString,
+                    request_deserializer=methods__pb2.message.FromString,
+                    response_serializer=methods__pb2.message.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -121,8 +121,8 @@ class workerDelete(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/workerDelete/workerDelete',
-            methods__pb2.deleteMessage.SerializeToString,
-            methods__pb2.deleteMessage.FromString,
+            methods__pb2.message.SerializeToString,
+            methods__pb2.message.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -138,8 +138,8 @@ class listWorkersStub(object):
         """
         self.listWorkers = channel.unary_unary(
                 '/listWorkers/listWorkers',
-                request_serializer=methods__pb2.listMessage.SerializeToString,
-                response_deserializer=methods__pb2.listMessage.FromString,
+                request_serializer=methods__pb2.message.SerializeToString,
+                response_deserializer=methods__pb2.message.FromString,
                 )
 
 
@@ -157,8 +157,8 @@ def add_listWorkersServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'listWorkers': grpc.unary_unary_rpc_method_handler(
                     servicer.listWorkers,
-                    request_deserializer=methods__pb2.listMessage.FromString,
-                    response_serializer=methods__pb2.listMessage.SerializeToString,
+                    request_deserializer=methods__pb2.message.FromString,
+                    response_serializer=methods__pb2.message.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -182,8 +182,8 @@ class listWorkers(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/listWorkers/listWorkers',
-            methods__pb2.listMessage.SerializeToString,
-            methods__pb2.listMessage.FromString,
+            methods__pb2.message.SerializeToString,
+            methods__pb2.message.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -199,8 +199,8 @@ class countWordsStub(object):
         """
         self.countWords = channel.unary_unary(
                 '/countWords/countWords',
-                request_serializer=methods__pb2.countMessage.SerializeToString,
-                response_deserializer=methods__pb2.countMessage.FromString,
+                request_serializer=methods__pb2.message.SerializeToString,
+                response_deserializer=methods__pb2.message.FromString,
                 )
 
 
@@ -218,8 +218,8 @@ def add_countWordsServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'countWords': grpc.unary_unary_rpc_method_handler(
                     servicer.countWords,
-                    request_deserializer=methods__pb2.countMessage.FromString,
-                    response_serializer=methods__pb2.countMessage.SerializeToString,
+                    request_deserializer=methods__pb2.message.FromString,
+                    response_serializer=methods__pb2.message.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -243,8 +243,8 @@ class countWords(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/countWords/countWords',
-            methods__pb2.countMessage.SerializeToString,
-            methods__pb2.countMessage.FromString,
+            methods__pb2.message.SerializeToString,
+            methods__pb2.message.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -260,8 +260,8 @@ class enumerateWordsStub(object):
         """
         self.enumerateWords = channel.unary_unary(
                 '/enumerateWords/enumerateWords',
-                request_serializer=methods__pb2.enumerateMessage.SerializeToString,
-                response_deserializer=methods__pb2.enumerateMessage.FromString,
+                request_serializer=methods__pb2.message.SerializeToString,
+                response_deserializer=methods__pb2.message.FromString,
                 )
 
 
@@ -279,8 +279,8 @@ def add_enumerateWordsServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'enumerateWords': grpc.unary_unary_rpc_method_handler(
                     servicer.enumerateWords,
-                    request_deserializer=methods__pb2.enumerateMessage.FromString,
-                    response_serializer=methods__pb2.enumerateMessage.SerializeToString,
+                    request_deserializer=methods__pb2.message.FromString,
+                    response_serializer=methods__pb2.message.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -304,7 +304,7 @@ class enumerateWords(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/enumerateWords/enumerateWords',
-            methods__pb2.enumerateMessage.SerializeToString,
-            methods__pb2.enumerateMessage.FromString,
+            methods__pb2.message.SerializeToString,
+            methods__pb2.message.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
