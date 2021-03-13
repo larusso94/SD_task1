@@ -10,4 +10,4 @@ message message{
 '''
 
 def enumerateWords(request):
-    return 0
+    return request.url

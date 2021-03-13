@@ -1,23 +1,23 @@
 import grpc
 from concurrent import futures
 import time
-
 import methods_pb2
 import methods_pb2_grpc
+import ast
+import redis
 
 import worker
 import countWords
 import enumerateWords
 import multiprocessing as mp
 
+CONNECTION = redis.Redis(host='localhost', port=3679)
 MAX_WORKERS = mp.cpu_count()
 POOL = mp.Pool(MAX_WORKERS)
 MANAGER = mp.Manager()
 EVENTS = {}
 WORKERS = {}
 WORKER_ID = 1
-
-
 
 #comunicación grpc 
 #----------------------------------------------------------------------------------------------------
@@ -39,6 +39,7 @@ class workerCreateServicer(methods_pb2_grpc.workerCreateServicer):
             return response
         response.error = -1
         return response
+
 class workerDeleteServicer(methods_pb2_grpc.workerDeleteServicer):
     def workerDelete(self, request, context):
         global WORKER_ID
@@ -54,20 +55,31 @@ class workerDeleteServicer(methods_pb2_grpc.workerDeleteServicer):
             return response
         response.error = -1
         return response
+
 class listWorkersServicer(methods_pb2_grpc.listWorkersServicer):
     def listWorkers(self, request, context):
         response = methods_pb2.message()
         response.list = str(WORKERS)
         return response
+
 class countWordsServicer(methods_pb2_grpc.countWordsServicer):
     def countWords(self, request, context):
+        global CONNECTION
+        files = ast.literal_eval(request.url)
+        for file in files:
+            print(file)
         response = methods_pb2.message()
-        response.result = countWords.countWords(request)
+        response.count = countWords.countWords(request)
         return response
+
 class enumerateWordsServicer(methods_pb2_grpc.enumerateWordsServicer):
     def enumerateWords(self, request, context):
+
+        files = ast.literal_eval(request.url)
+        for file in files:
+            print(file)
         response = methods_pb2.message()
-        response.result = enumerateWords.enumerateWords(request)
+        response.enum = enumerateWords.enumerateWords(request)
         return response
 
 server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))

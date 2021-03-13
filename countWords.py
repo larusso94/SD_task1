@@ -10,4 +10,5 @@ message message{
 '''
 
 def countWords(request):
-    return 0
+    return len(request.url)
+    
