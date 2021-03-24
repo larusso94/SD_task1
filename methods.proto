@@ -5,18 +5,11 @@ message message{
     int32 error = 1;
     int32 node = 2;
     int32 count = 3;
-    string url = 4;
-    string list = 5;
-    string enum = 6;    
+    int32 op = 4;
+    string url = 5;
+    string list = 6;
+    string enum = 7;    
 }
 
-service workerCreate{
-    rpc workerCreate(message) returns (message) {}}
-service  workerDelete{
-    rpc workerDelete(message) returns (message){}}
-service listWorkers{
-    rpc listWorkers(message) returns (message) {}}
-service countWords{
-    rpc countWords(message) returns (message) {}}
-service enumerateWords{
-    rpc enumerateWords(message) returns (message) {}}
+service operation{
+    rpc operation(message) returns (message) {}}

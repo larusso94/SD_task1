@@ -5,13 +5,10 @@ import methods_pb2
 import methods_pb2_grpc
 import ast
 import redis
-
 import worker
-import countWords
-import enumerateWords
 import multiprocessing as mp
+import json
 
-CONNECTION = redis.Redis(host='localhost', port=3679)
 MAX_WORKERS = mp.cpu_count()
 POOL = mp.Pool(MAX_WORKERS)
 MANAGER = mp.Manager()
@@ -19,89 +16,116 @@ EVENTS = {}
 WORKERS = {}
 WORKER_ID = 1
 
+CONNECTION = redis.Redis(host='localhost', port=6379)
+JOB_COUNT = 0
 #comunicación grpc 
 #----------------------------------------------------------------------------------------------------
-class workerCreateServicer(methods_pb2_grpc.workerCreateServicer):
-    def workerCreate(self, request, context):
-        global WORKER_ID
-        global WORKERS
-        global MAX_WORKERS
-        global POOL
-        global MANAGER
-        global EVENTS
-        response = methods_pb2.message()
-        if(len(WORKERS) < MAX_WORKERS):
-            EVENTS[WORKER_ID] = MANAGER.Event()
-            result = POOL.apply_async(worker.worker,args=(WORKER_ID,EVENTS[WORKER_ID]))
-            WORKERS[WORKER_ID] = result
-            WORKER_ID += 1
-            response.error = 0
-            return response
-        response.error = -1
-        return response
+def error(request):
+    request.error = -1
+    return request
 
-class workerDeleteServicer(methods_pb2_grpc.workerDeleteServicer):
-    def workerDelete(self, request, context):
-        global WORKER_ID
-        global WORKERS
-        global MAX_WORKERS
-        global EVENTS
-        response = methods_pb2.message()
-        if (len(WORKERS) > 0 and request.node in WORKERS):
-            EVENTS[request.node].set()
-            WORKERS[request.node].get()
-            del(WORKERS[request.node])
-            response.error = 0
-            return response
-        response.error = -1
+def workerCreate(request):
+    global WORKER_ID
+    global WORKERS
+    global MAX_WORKERS
+    global POOL
+    global MANAGER
+    global EVENTS
+    response = methods_pb2.message()
+    if(len(WORKERS) < MAX_WORKERS):
+        EVENTS[WORKER_ID] = MANAGER.Event()
+        result = POOL.apply_async(worker.worker,args=(WORKER_ID,EVENTS[WORKER_ID]))
+        WORKERS[WORKER_ID] = result
+        WORKER_ID += 1
+        response.error = 0
         return response
+    response.error = -1
+    return response
 
-class listWorkersServicer(methods_pb2_grpc.listWorkersServicer):
-    def listWorkers(self, request, context):
-        response = methods_pb2.message()
-        response.list = str(WORKERS)
+def workerDelete(request):
+    global WORKER_ID
+    global WORKERS
+    global MAX_WORKERS
+    global EVENTS
+    response = methods_pb2.message()
+    if (len(WORKERS) > 0 and request.node in WORKERS):
+        EVENTS[request.node].set()
+        WORKERS[request.node].get()
+        del(WORKERS[request.node])
+        response.error = 0
         return response
+    response.error = -1
+    return response
 
-class countWordsServicer(methods_pb2_grpc.countWordsServicer):
-    def countWords(self, request, context):
-        global CONNECTION
-        files = ast.literal_eval(request.url)
-        for file in files:
-            print(file)
-        response = methods_pb2.message()
-        response.count = countWords.countWords(request)
-        return response
+def listWorkers(request):
+    response = methods_pb2.message()
+    response.list = str(WORKERS)
+    return response
 
-class enumerateWordsServicer(methods_pb2_grpc.enumerateWordsServicer):
-    def enumerateWords(self, request, context):
+def enqueue(op, data):
+    global CONNECTION
+    data = {
+        'op' : op,
+        'data' : data, 
+    }
+    CONNECTION.rpush('queue:jobs',json.dumps(data))
 
-        files = ast.literal_eval(request.url)
-        for file in files:
-            print(file)
-        response = methods_pb2.message()
-        response.enum = enumerateWords.enumerateWords(request)
-        return response
+def countWords(request):
+    global JOB_COUNT
+    response = methods_pb2.message()
+    files = ast.literal_eval(request.url)
+    
+    for file in files:
+        JOB_COUNT+=1
+        enqueue('count', file)
+    JOB_COUNT+=1
+    enqueue('result', None)
+
+    end = False
+    while(not end):
+        time.sleep(1)
+    return response
+
+def enumerateWords(request):
+    global JOB_COUNT
+    response = methods_pb2.message()
+    files = ast.literal_eval(request.url)
+    
+    for file in files:
+        JOB_COUNT+=1
+        enqueue('enum', file)
+    JOB_COUNT+=1
+    enqueue('result', None)
+
+    end = False
+    while(not end):
+        time.sleep(1)
+    return response
+
+class operationServicer(methods_pb2_grpc.operationServicer):
+    def operation(self, request, context):
+        switch = {
+            1 : workerCreate,
+            2 : workerDelete,
+            3 : listWorkers,
+            4 : countWords,
+            5 : enumerateWords,
+        }
+        return switch.get(request.op, error)(request)
 
 server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
 
-methods_pb2_grpc.add_workerCreateServicer_to_server(
-    workerCreateServicer(), server)
-methods_pb2_grpc.add_workerDeleteServicer_to_server(
-    workerDeleteServicer(), server)
-methods_pb2_grpc.add_listWorkersServicer_to_server(
-    listWorkersServicer(), server)
-methods_pb2_grpc.add_countWordsServicer_to_server(
-    countWordsServicer(), server)
-methods_pb2_grpc.add_enumerateWordsServicer_to_server(
-    enumerateWordsServicer(), server)
+methods_pb2_grpc.add_operationServicer_to_server(
+    operationServicer(), server)
 #----------------------------------------------------------------------------------------------------
 
 print('Starting server. Listing on port 50051.')
 server.add_insecure_port('[::]:50051')
 server.start()
-
+CONNECTION.ping()
 try:
     while True:
         time.sleep(86400)
 except KeyboardInterrupt:
+    CONNECTION.flushall()
     server.stop(0)

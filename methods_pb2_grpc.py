@@ -5,7 +5,7 @@ import grpc
 import methods_pb2 as methods__pb2
 
 
-class workerCreateStub(object):
+class operationStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -14,42 +14,42 @@ class workerCreateStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.workerCreate = channel.unary_unary(
-                '/workerCreate/workerCreate',
+        self.operation = channel.unary_unary(
+                '/operation/operation',
                 request_serializer=methods__pb2.message.SerializeToString,
                 response_deserializer=methods__pb2.message.FromString,
                 )
 
 
-class workerCreateServicer(object):
+class operationServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def workerCreate(self, request, context):
+    def operation(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
 
-def add_workerCreateServicer_to_server(servicer, server):
+def add_operationServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'workerCreate': grpc.unary_unary_rpc_method_handler(
-                    servicer.workerCreate,
+            'operation': grpc.unary_unary_rpc_method_handler(
+                    servicer.operation,
                     request_deserializer=methods__pb2.message.FromString,
                     response_serializer=methods__pb2.message.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'workerCreate', rpc_method_handlers)
+            'operation', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class workerCreate(object):
+class operation(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def workerCreate(request,
+    def operation(request,
             target,
             options=(),
             channel_credentials=None,
@@ -59,251 +59,7 @@ class workerCreate(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/workerCreate/workerCreate',
-            methods__pb2.message.SerializeToString,
-            methods__pb2.message.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-
-class workerDeleteStub(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def __init__(self, channel):
-        """Constructor.
-
-        Args:
-            channel: A grpc.Channel.
-        """
-        self.workerDelete = channel.unary_unary(
-                '/workerDelete/workerDelete',
-                request_serializer=methods__pb2.message.SerializeToString,
-                response_deserializer=methods__pb2.message.FromString,
-                )
-
-
-class workerDeleteServicer(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def workerDelete(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-
-def add_workerDeleteServicer_to_server(servicer, server):
-    rpc_method_handlers = {
-            'workerDelete': grpc.unary_unary_rpc_method_handler(
-                    servicer.workerDelete,
-                    request_deserializer=methods__pb2.message.FromString,
-                    response_serializer=methods__pb2.message.SerializeToString,
-            ),
-    }
-    generic_handler = grpc.method_handlers_generic_handler(
-            'workerDelete', rpc_method_handlers)
-    server.add_generic_rpc_handlers((generic_handler,))
-
-
- # This class is part of an EXPERIMENTAL API.
-class workerDelete(object):
-    """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def workerDelete(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/workerDelete/workerDelete',
-            methods__pb2.message.SerializeToString,
-            methods__pb2.message.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-
-class listWorkersStub(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def __init__(self, channel):
-        """Constructor.
-
-        Args:
-            channel: A grpc.Channel.
-        """
-        self.listWorkers = channel.unary_unary(
-                '/listWorkers/listWorkers',
-                request_serializer=methods__pb2.message.SerializeToString,
-                response_deserializer=methods__pb2.message.FromString,
-                )
-
-
-class listWorkersServicer(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def listWorkers(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-
-def add_listWorkersServicer_to_server(servicer, server):
-    rpc_method_handlers = {
-            'listWorkers': grpc.unary_unary_rpc_method_handler(
-                    servicer.listWorkers,
-                    request_deserializer=methods__pb2.message.FromString,
-                    response_serializer=methods__pb2.message.SerializeToString,
-            ),
-    }
-    generic_handler = grpc.method_handlers_generic_handler(
-            'listWorkers', rpc_method_handlers)
-    server.add_generic_rpc_handlers((generic_handler,))
-
-
- # This class is part of an EXPERIMENTAL API.
-class listWorkers(object):
-    """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def listWorkers(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/listWorkers/listWorkers',
-            methods__pb2.message.SerializeToString,
-            methods__pb2.message.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-
-class countWordsStub(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def __init__(self, channel):
-        """Constructor.
-
-        Args:
-            channel: A grpc.Channel.
-        """
-        self.countWords = channel.unary_unary(
-                '/countWords/countWords',
-                request_serializer=methods__pb2.message.SerializeToString,
-                response_deserializer=methods__pb2.message.FromString,
-                )
-
-
-class countWordsServicer(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def countWords(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-
-def add_countWordsServicer_to_server(servicer, server):
-    rpc_method_handlers = {
-            'countWords': grpc.unary_unary_rpc_method_handler(
-                    servicer.countWords,
-                    request_deserializer=methods__pb2.message.FromString,
-                    response_serializer=methods__pb2.message.SerializeToString,
-            ),
-    }
-    generic_handler = grpc.method_handlers_generic_handler(
-            'countWords', rpc_method_handlers)
-    server.add_generic_rpc_handlers((generic_handler,))
-
-
- # This class is part of an EXPERIMENTAL API.
-class countWords(object):
-    """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def countWords(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/countWords/countWords',
-            methods__pb2.message.SerializeToString,
-            methods__pb2.message.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-
-class enumerateWordsStub(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def __init__(self, channel):
-        """Constructor.
-
-        Args:
-            channel: A grpc.Channel.
-        """
-        self.enumerateWords = channel.unary_unary(
-                '/enumerateWords/enumerateWords',
-                request_serializer=methods__pb2.message.SerializeToString,
-                response_deserializer=methods__pb2.message.FromString,
-                )
-
-
-class enumerateWordsServicer(object):
-    """Missing associated documentation comment in .proto file."""
-
-    def enumerateWords(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-
-def add_enumerateWordsServicer_to_server(servicer, server):
-    rpc_method_handlers = {
-            'enumerateWords': grpc.unary_unary_rpc_method_handler(
-                    servicer.enumerateWords,
-                    request_deserializer=methods__pb2.message.FromString,
-                    response_serializer=methods__pb2.message.SerializeToString,
-            ),
-    }
-    generic_handler = grpc.method_handlers_generic_handler(
-            'enumerateWords', rpc_method_handlers)
-    server.add_generic_rpc_handlers((generic_handler,))
-
-
- # This class is part of an EXPERIMENTAL API.
-class enumerateWords(object):
-    """Missing associated documentation comment in .proto file."""
-
-    @staticmethod
-    def enumerateWords(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/enumerateWords/enumerateWords',
+        return grpc.experimental.unary_unary(request, target, '/operation/operation',
             methods__pb2.message.SerializeToString,
             methods__pb2.message.FromString,
             options, channel_credentials,
