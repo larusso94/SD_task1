@@ -6,18 +6,25 @@ import methods_pb2_grpc
 import ast
 import redis
 import worker
-import multiprocessing as mp
 import json
 
-MAX_WORKERS = mp.cpu_count()
-POOL = mp.Pool(MAX_WORKERS)
-MANAGER = mp.Manager()
-EVENTS = {}
 WORKERS = {}
-WORKER_ID = 1
-
 CONNECTION = redis.Redis(host='localhost', port=6379)
-JOB_COUNT = 0
+
+WORKER_ID = 0
+JOB_ID = 0
+REQUEST_ID = 0
+
+def enqueue(op, data):
+    global CONNECTION
+    global JOB_ID
+    JOB_ID+=1
+    data = {
+        'op' : op,
+        'data' : data, 
+    }
+    CONNECTION.rpush('queue:jobs',json.dumps(data))
+    
 #comunicación grpc 
 #----------------------------------------------------------------------------------------------------
 def error(request):
@@ -27,79 +34,57 @@ def error(request):
 def workerCreate(request):
     global WORKER_ID
     global WORKERS
-    global MAX_WORKERS
-    global POOL
-    global MANAGER
-    global EVENTS
+    global CONNECTION
     response = methods_pb2.message()
-    if(len(WORKERS) < MAX_WORKERS):
-        EVENTS[WORKER_ID] = MANAGER.Event()
-        result = POOL.apply_async(worker.worker,args=(WORKER_ID,EVENTS[WORKER_ID]))
-        WORKERS[WORKER_ID] = result
-        WORKER_ID += 1
+    try :
+        WORKERS[WORKER_ID] = worker.new_worker(WORKER_ID, CONNECTION)
+        WORKER_ID+=1
         response.error = 0
-        return response
-    response.error = -1
+    except :
+        response.error = 1
     return response
 
 def workerDelete(request):
     global WORKER_ID
     global WORKERS
-    global MAX_WORKERS
-    global EVENTS
     response = methods_pb2.message()
-    if (len(WORKERS) > 0 and request.node in WORKERS):
-        EVENTS[request.node].set()
-        WORKERS[request.node].get()
-        del(WORKERS[request.node])
+    try :
+        WORKERS[request.worker].terminate()
+        WORKERS[request.worker].join()
+        del WORKERS[request.worker]
         response.error = 0
-        return response
-    response.error = -1
+    except :
+        response.error = -1
     return response
 
 def listWorkers(request):
+    global WORKERS
     response = methods_pb2.message()
     response.list = str(WORKERS)
     return response
 
-def enqueue(op, data):
-    global CONNECTION
-    data = {
-        'op' : op,
-        'data' : data, 
-    }
-    CONNECTION.rpush('queue:jobs',json.dumps(data))
-
 def countWords(request):
-    global JOB_COUNT
+    global REQUEST_ID
+    REQUEST_ID+=1
     response = methods_pb2.message()
-    files = ast.literal_eval(request.url)
-    
-    for file in files:
-        JOB_COUNT+=1
-        enqueue('count', file)
-    JOB_COUNT+=1
-    enqueue('result', None)
-
-    end = False
-    while(not end):
-        time.sleep(1)
+    try :
+        files = ast.literal_eval(request.url)
+        for file in files:
+            enqueue('count', file)
+    except :
+        response.error = -1
     return response
 
 def enumerateWords(request):
-    global JOB_COUNT
+    global REQUEST_ID
+    REQUEST_ID+=1
     response = methods_pb2.message()
-    files = ast.literal_eval(request.url)
-    
-    for file in files:
-        JOB_COUNT+=1
-        enqueue('enum', file)
-    JOB_COUNT+=1
-    enqueue('result', None)
-
-    end = False
-    while(not end):
-        time.sleep(1)
+    try : 
+        files = ast.literal_eval(request.url)
+        for file in files:
+            enqueue('enum', file)
+    except :
+        response.error = -1
     return response
 
 class operationServicer(methods_pb2_grpc.operationServicer):
@@ -111,7 +96,7 @@ class operationServicer(methods_pb2_grpc.operationServicer):
             4 : countWords,
             5 : enumerateWords,
         }
-        return switch.get(request.op, error)(request)
+        return switch.get(request.command, error)(request)
 
 server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
 

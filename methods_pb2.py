@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\rmethods.proto\"j\n\x07message\x12\r\n\x05\x65rror\x18\x01 \x01(\x05\x12\x0c\n\x04node\x18\x02 \x01(\x05\x12\r\n\x05\x63ount\x18\x03 \x01(\x05\x12\n\n\x02op\x18\x04 \x01(\x05\x12\x0b\n\x03url\x18\x05 \x01(\t\x12\x0c\n\x04list\x18\x06 \x01(\t\x12\x0c\n\x04\x65num\x18\x07 \x01(\t2.\n\toperation\x12!\n\toperation\x12\x08.message\x1a\x08.message\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\rmethods.proto\"q\n\x07message\x12\r\n\x05\x65rror\x18\x01 \x01(\x05\x12\x0e\n\x06worker\x18\x02 \x01(\x05\x12\r\n\x05\x63ount\x18\x03 \x01(\x05\x12\x0f\n\x07\x63ommand\x18\x04 \x01(\x05\x12\x0b\n\x03url\x18\x05 \x01(\t\x12\x0c\n\x04list\x18\x06 \x01(\t\x12\x0c\n\x04\x65num\x18\x07 \x01(\t2.\n\toperation\x12!\n\toperation\x12\x08.message\x1a\x08.message\"\x00\x62\x06proto3'
 )
 
 
@@ -41,7 +41,7 @@ _MESSAGE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='node', full_name='message.node', index=1,
+      name='worker', full_name='message.worker', index=1,
       number=2, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -55,7 +55,7 @@ _MESSAGE = _descriptor.Descriptor(
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='op', full_name='message.op', index=3,
+      name='command', full_name='message.command', index=3,
       number=4, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -95,7 +95,7 @@ _MESSAGE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=17,
-  serialized_end=123,
+  serialized_end=130,
 )
 
 DESCRIPTOR.message_types_by_name['message'] = _MESSAGE
@@ -117,8 +117,8 @@ _OPERATION = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=125,
-  serialized_end=171,
+  serialized_start=132,
+  serialized_end=178,
   methods=[
   _descriptor.MethodDescriptor(
     name='operation',

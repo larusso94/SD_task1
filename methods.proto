@@ -3,9 +3,9 @@ syntax = "proto3";
 /* utilizo un solo mensage genérico para toda la comunicación por simplicidad, en un sistema tan perqueño como este no representa una gran carga para el sistema*/
 message message{
     int32 error = 1;
-    int32 node = 2;
+    int32 worker = 2;
     int32 count = 3;
-    int32 op = 4;
+    int32 command = 4;
     string url = 5;
     string list = 6;
     string enum = 7;    

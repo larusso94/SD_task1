@@ -13,7 +13,7 @@ def cli():
 @cli.command('create',help='Creates new work node.')
 def workerCreate():
     stub = methods_pb2_grpc.operationStub(channel)
-    message = methods_pb2.message(op = 1)
+    message = methods_pb2.message(command = 1)
     response = stub.operation(message)
     print(response.error)
     return 0
@@ -22,7 +22,7 @@ def workerCreate():
 @click.argument('num')
 def workerDelete(num):
     stub = methods_pb2_grpc.operationStub(channel)
-    message = methods_pb2.message(op = 2, node = int(num))
+    message = methods_pb2.message(command = 2, worker = int(num))
     response = stub.operation(message)
     print(response.error)
     return 0
@@ -30,7 +30,7 @@ def workerDelete(num):
 @cli.command('list', help='List all work nodes with ID.')
 def workerList():
     stub = methods_pb2_grpc.operationStub(channel)
-    message = methods_pb2.message(op = 3)
+    message = methods_pb2.message(command = 3)
     response = stub.operation(message)
     print(response.list)
     return 0
@@ -39,7 +39,7 @@ def workerList():
 @click.argument('files', nargs=-1)
 def wordCount(files):
     stub = methods_pb2_grpc.operationStub(channel)
-    message = methods_pb2.message(op = 4, url = str(files))
+    message = methods_pb2.message(command = 4, url = str(files))
     response = stub.operation(message)
     print(response.count)
     return 0
@@ -48,7 +48,7 @@ def wordCount(files):
 @click.argument('files', nargs=-1)
 def countWords(files):
     stub = methods_pb2_grpc.operationStub(channel)
-    message = methods_pb2.message(op = 5, url = str(files))
+    message = methods_pb2.message(command = 5, url = str(files))
     response = stub.operation(message)
     print(response.enum)
     return 0
