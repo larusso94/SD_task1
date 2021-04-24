@@ -4,11 +4,11 @@ syntax = "proto3";
 message message{
     int32 error = 1;
     int32 worker = 2;
-    int32 count = 3;
-    int32 command = 4;
-    string url = 5;
-    string list = 6;
-    string enum = 7;    
+    int32 command = 3;
+    string url = 4;
+    string list = 5;
+    string result = 6;
+      
 }
 
 service operation{

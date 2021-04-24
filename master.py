@@ -15,15 +15,40 @@ WORKER_ID = 0
 JOB_ID = 0
 REQUEST_ID = 0
 
-def enqueue(op, data):
+def enqueue(op, data, id, result):
     global CONNECTION
     global JOB_ID
     JOB_ID+=1
     data = {
         'op' : op,
-        'data' : data, 
+        'data' : data,
+        'id' : id,
+        'result' : result
     }
     CONNECTION.rpush('queue:jobs',json.dumps(data))
+
+def job(request, operation):
+    global REQUEST_ID
+    response = methods_pb2.message()
+    response.error = -1
+    try :
+        files = ast.literal_eval(request.url)
+    except :
+        print("Url wrong format")
+    
+    for file in files:
+        enqueue(operation, file, REQUEST_ID, False)
+    enqueue(operation, '', REQUEST_ID, True)
+
+    result = CONNECTION.blpop('queue:result'+str(REQUEST_ID),0)
+    result = json.loads(result[1])
+
+    response.result = str(result['result'])
+    response.error = 0
+    
+    REQUEST_ID+=1
+
+    return response
     
 #comunicación grpc 
 #----------------------------------------------------------------------------------------------------
@@ -64,28 +89,10 @@ def listWorkers(request):
     return response
 
 def countWords(request):
-    global REQUEST_ID
-    REQUEST_ID+=1
-    response = methods_pb2.message()
-    try :
-        files = ast.literal_eval(request.url)
-        for file in files:
-            enqueue('count', file)
-    except :
-        response.error = -1
-    return response
+    return job(request, 'count')
 
 def enumerateWords(request):
-    global REQUEST_ID
-    REQUEST_ID+=1
-    response = methods_pb2.message()
-    try : 
-        files = ast.literal_eval(request.url)
-        for file in files:
-            enqueue('enum', file)
-    except :
-        response.error = -1
-    return response
+    return job(request, 'enum')
 
 class operationServicer(methods_pb2_grpc.operationServicer):
     def operation(self, request, context):

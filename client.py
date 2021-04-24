@@ -41,7 +41,7 @@ def wordCount(files):
     stub = methods_pb2_grpc.operationStub(channel)
     message = methods_pb2.message(command = 4, url = str(files))
     response = stub.operation(message)
-    print(response.count)
+    print(response.result)
     return 0
 
 @click.command('enumerate', help='Enumerate repeated words in a text file by given urls.')
@@ -50,7 +50,7 @@ def countWords(files):
     stub = methods_pb2_grpc.operationStub(channel)
     message = methods_pb2.message(command = 5, url = str(files))
     response = stub.operation(message)
-    print(response.enum)
+    print(response.result)
     return 0
 
 cli.add_command(wordCount)
